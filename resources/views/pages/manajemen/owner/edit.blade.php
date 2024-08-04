@@ -5,7 +5,7 @@
         <h6 class="fw-bold py-1 mb-3"><span class="text-muted fw-light">Manajemen / Data Owner / </span>Edit Owner</h6>
         <form action="{{ route('manajemen-owner-update', $owner->id) }}" method="POST">
             @csrf
-            @method('PUT') <!-- Ubah metode menjadi PUT -->
+            @method('PUT')
             <div class="row">
                 <div class="col-xl">
                     <div class="card mb-4">

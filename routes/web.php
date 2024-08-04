@@ -4,7 +4,9 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KasirController;
 use App\Http\Controllers\OwnerController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use Symfony\Component\HttpKernel\Profiler\Profile;
 
 //------------------------------------- AUTH -----------------------------------------
 //login
@@ -15,6 +17,16 @@ Route::post('/login', [AuthController::class, 'authenticate'])->name('authentica
 Route::post('/logout', [AuthController::class, 'logout'])
     ->middleware('PreventBackHistory')
     ->name('logout');
+
+//---------------------------------- PROFILE -----------------------------------------
+
+Route::prefix('profile')->middleware(['auth'])->group(function () {
+    //Data Profile
+    Route::get('/index/{id}', [ProfileController::class, 'index'])->name('profile-index');
+    Route::put('/update/{id}', [ProfileController::class, 'update'])->name('profile-update'); 
+    //Ganti-Password
+    Route::post('/changePassword', [ProfileController::class, 'changePassword'])->name('profile-changePassword'); 
+});
 
 
 //---------------------------------- DASHBORD -----------------------------------------
